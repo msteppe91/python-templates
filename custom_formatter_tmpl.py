@@ -5,7 +5,6 @@ Template class for custom logging formatter to colorize logging output
 
 import argparse
 import logging
-import os
 import sys
 
 
@@ -87,11 +86,8 @@ def read_command_line_arguments(passed_arguments: list) -> argparse.Namespace:
         description=__doc__)
     # Pop optional args off parser to get required first in help documentation
     optional = parser._action_groups.pop()  # pylint: disable=protected-access
-    required = parser.add_argument_group('required arguments')
     # Re-add optional args to parser now that required args exist
     parser._action_groups.append(optional)  # pylint: disable=protected-access
-
-    # Required arguments
 
     # Optional arguments
     optional.add_argument("-v", "--verbose",
@@ -114,7 +110,7 @@ def main():
     logger = setup_logger(args)
 
     # Do work
-    logger.debug("Hello World")
+    logger.debug("Hello World")  # will only show during -v flag usage
     logger.info("Hello World")
     logger.warning("Hello World")
     logger.error("Hello World")
